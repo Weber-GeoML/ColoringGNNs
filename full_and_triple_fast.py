@@ -1,4 +1,3 @@
-
 import networkx as nx
 import random
 
@@ -66,36 +65,6 @@ class Coloring:
 			improvements[update_node] = 0
 			colors[update_node] = update_color
 		return Coloring(self.adj_lst, k, colors, neighbor_color_frequencies, conflicts, loss)
-
-def random_color(g, k):
-	return random.choices(range(k), k=g.order())
-
-def discrete_color(g, k, starting_colors):
-	order = g.order()
-	colors = starting_colors.copy()
-	neighbor_colors = []
-	for i in range(order):
-		neighbor_colors.append({c:0 for c in range(k)})
-	for node, color in enumerate(colors):
-		for neighbor in g.neighbors(node):
-			neighbor_colors[neighbor][color] += 1
-	improvements = [neighbor_colors[node][colors[node]] - min(neighbor_colors[node].values()) for node in range(order)]
-	while True:
-		max_improvement = max(improvements)
-		if max_improvement == 0:
-			return colors
-		max_improvement_nodes = [node for node, improvement in enumerate(improvements) if improvement == max_improvement]
-		update_node = random.choice(max_improvement_nodes)
-		min_neighbor_color_frequency = min(neighbor_colors[update_node].values())
-		max_improvement_colors = [color for color in range(k) if neighbor_colors[update_node][color] == min_neighbor_color_frequency]
-		update_color = random.choice(max_improvement_colors)
-		old_color = colors[update_node]
-		colors[update_node] = update_color
-		improvements[update_node] = 0
-		for neighbor in nx.neighbors(g, update_node):
-			neighbor_colors[neighbor][old_color] -= 1
-			neighbor_colors[neighbor][update_color] += 1
-			improvements[neighbor] = neighbor_colors[neighbor][colors[neighbor]] - min(neighbor_colors[neighbor].values())
 
 def full_color(g, k):
 	adj_lst = [list(g.neighbors(node)) for node in range(g.order())]
