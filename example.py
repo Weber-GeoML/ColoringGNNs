@@ -1,4 +1,3 @@
-
 import networkx as nx
 from full_and_triple_fast import triple_color
 from full_and_triple_fast import loss
