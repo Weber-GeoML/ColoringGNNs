@@ -2,8 +2,6 @@
 
 #### Knut Vanderbush and Melanie Weber
 
-<br>
-
 ## Overview
 
 This repository contains implementations of the algorithms `Mod-GCN`, `Full-GCN`, `Discrete-Color`, `Full-Color`, and `Triple-Color`, as well as the unmodified predecessor to `Mod-GCN`, described in the paper *Neural Algorithmic Reasoning for Approximate k-Coloring with Recursive Warm Starts.*
