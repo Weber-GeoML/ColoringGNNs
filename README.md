@@ -4,7 +4,7 @@
 
 ## Overview
 
-This repository contains implementations of the algorithms `Mod-GCN`, `Full-GCN`, `Discrete-Color`, `Full-Color`, and `Triple-Color`, as well as the unmodified predecessor to `Mod-GCN`, described in the paper *Neural Algorithmic Reasoning for Approximate k-Coloring with Recursive Warm Starts.*
+This repository contains implementations of the algorithms `Mod-GCN`, `Full-GCN`, `Discrete-Color`, `Full-Color`, and `Triple-Color`, as well as the unmodified predecessor to `Mod-GCN`, described in the paper *Neural Algorithmic Reasoning for Approximate k-Coloring with Recursive Warm Starts* <a href="#1">[1]</a>. The paper is available at https://arxiv.org/abs/2601.05137.
 
 Each algorithm takes two arguments, a NetworkX graph `g` and a desired number of colors `k`, and can be run out of the box by supplying these arguments. Note that one must call 
 ```g = nx.convert_node_labels_to_integers(g)```
@@ -33,3 +33,7 @@ Each `Coloring` object has a method called `improve`, which produces a `k+1` col
 ## Full-GCN
 
 The file `full_gcn.py` contains a straightforward implementation of `Full-GCN` as described in the paper. The function is named `full_gcn_color`. Here, graph colorings are again stored in a `Coloring` object. This time, the `improve` method follows the procedure for `Full-GCN` described in the paper.
+
+## References
+
+<a id="1">[1]</a> Knut Vanderbush and Melanie Weber. *Neural Algorithmic Reasoning for Approximate k-Coloring with Recursive Warm Starts*. arXiv preprint arXiv:2601.05137, 2026. 
