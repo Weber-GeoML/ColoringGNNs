@@ -10,7 +10,7 @@ Each algorithm takes two arguments, a NetworkX graph `g` and a desired number of
 ```
 g = nx.convert_node_labels_to_integers(g)
 ```
-before running each algorithm, if the nodes of `g` are not already represented in this form. Letting `n` be the order of `g`, each algorithm outputs a list of `n` integers between `0` and `k-1`, such that the `i`th integer is the color of vertex `i`. The function ``loss`` provided in each file takes two arguments, a NetworkX graph `g` and a list `colors` outputted by one of the coloring algorithms, and returns the loss of that coloring. The file `example.py` demonstrates how to use `Full-GCN` to color an Erdős–Rényi graph of order `n` and average degree `d`, then print the loss of the resulting coloring.
+before running each algorithm, if the nodes of `g` are not already represented in this form. Letting `n` be the order of `g`, each algorithm outputs a list of `n` integers between `0` and `k-1`, such that the `i`th integer is the color of vertex `i`. The function ``loss`` provided in each file takes two arguments, a NetworkX graph `g` and a list `colors` outputted by running a coloring algorithm on `g`, and returns the loss of that coloring. The file `example.py` demonstrates how to use `Full-GCN` to color an Erdős–Rényi graph of order `n` and average degree `d`, then print the loss of the resulting coloring.
 
 ## Requirements
 
