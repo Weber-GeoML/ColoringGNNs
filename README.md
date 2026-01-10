@@ -34,7 +34,7 @@ Each `Coloring` object has a method called `improve`, which produces a `k+1` col
 
 ## Full-GCN
 
-The file `full_gcn.py` contains a straightforward implementation of `Full-GCN` as described in the paper. The function is named `full_gcn_color`. Here, graph colorings are again stored in a `Coloring` object. This time, the `improve` method follows the procedure for `Full-GCN` described in the paper.
+The file `full_gcn.py` contains a straightforward implementation of `Full-GCN` as described in the paper. The function is named `full_gcn_color`. Here, graph colorings are again stored in a `Coloring` object with an `improve` method. This time, the `improve` method follows the procedure for `Full-GCN` described in the paper.
 
 ## References
 
