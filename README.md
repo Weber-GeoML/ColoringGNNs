@@ -7,7 +7,9 @@
 This repository contains implementations of the algorithms `Mod-GCN`, `Full-GCN`, `Discrete-Color`, `Full-Color`, and `Triple-Color`, as well as the unmodified predecessor to `Mod-GCN`, described in the paper *Neural Algorithmic Reasoning for Approximate k-Coloring with Recursive Warm Starts* <a href="#1">[1]</a>. The paper is available at https://arxiv.org/abs/2601.05137.
 
 Each algorithm takes two arguments, a NetworkX graph `g` and a desired number of colors `k`, and can be run out of the box by supplying these arguments. Note that one must call 
-```g = nx.convert_node_labels_to_integers(g)```
+```
+g = nx.convert_node_labels_to_integers(g)
+```
 before running each algorithm, if the nodes of `g` are not already represented in this form. Letting `n` be the order of `g`, each algorithm outputs a list of `n` values between `0` and `k-1`, such that the `i`th value is the color of vertex `i`. The function ``loss`` provided in each file takes two arguments, a NetworkX graph `g` and a list `colors` outputted by one of the coloring algorithms, and returns the loss of that coloring. The file `example.py` demonstrates how to use `Full-GCN` to color an Erdős–Rényi graph of order `n` and average degree `d`, then print the loss of the resulting coloring.
 
 ## Requirements
