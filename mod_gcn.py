@@ -2,7 +2,6 @@ import networkx as nx
 import torch
 from torch_geometric.nn import GCNConv
 from torch_geometric.utils.convert import from_networkx
-import numpy as np
 from itertools import chain
 
 class GCN(torch.nn.Module):
@@ -29,8 +28,11 @@ def mod_gcn_color(g, k):
 	A = torch.tensor(nx.to_numpy_array(g, dtype='float32'))
 	features = [200, k]
 	net = GCN(features)
-	q, r = torch.linalg.qr(torch.randn(200, 200))
-	x = torch.nn.Parameter(q[:g.order()])
+	if g.order() <= 200:
+		q, r = torch.linalg.qr(torch.randn(200, 200))
+		x = torch.nn.Parameter(q[:g.order()])
+	else:
+		x = torch.nn.Parameter(torch.randn(g.order(), 200))
 	params = chain(net.parameters(), [x])
 	optimizer = torch.optim.AdamW(params)
 	min_hard_loss = torch.inf

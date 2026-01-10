@@ -3,7 +3,6 @@ import random
 import torch
 from torch_geometric.nn import GCNConv
 from torch_geometric.utils.convert import from_networkx
-import numpy as np
 from itertools import chain
 
 def discrete_color(g, k, starting_colors):
@@ -53,11 +52,10 @@ def loss(g, colors):
 
 class Coloring:
 
-	def __init__(self, g, k, colors, loss):
+	def __init__(self, g, k, colors):
 		self.g = g
 		self.k = k
 		self.colors = colors
-		self.loss = loss
 
 	def improve(self):
 		g = self.g
@@ -68,8 +66,11 @@ class Coloring:
 		A = torch.tensor(nx.to_numpy_array(g, dtype='float32'))
 		features = [200, k]
 		net = GCN(features)
-		q, r = torch.linalg.qr(torch.randn(200, 200))
-		x = torch.nn.Parameter(q[:g.order()])
+		if g.order() <= 200:
+			q, r = torch.linalg.qr(torch.randn(200, 200))
+			x = torch.nn.Parameter(q[:g.order()])
+		else:
+			x = torch.nn.Parameter(torch.randn(g.order(), 200))
 		params = chain(net.parameters(), [x])
 		optimizer = torch.optim.AdamW(params)
 		desired_probs = torch.zeros(g.order(), k)
@@ -115,11 +116,10 @@ class Coloring:
 			mod_loss.backward()
 			optimizer.step()
 		final_colors = discrete_color(g, k, best_colors)
-		final_loss = loss(g, best_colors)
-		return Coloring(g, k, final_colors, final_loss)
+		return Coloring(g, k, final_colors)
 
 def full_gcn_color(g, k):
-	colors = Coloring(g, 1, [0]*g.order(), g.size())
+	colors = Coloring(g, 1, [0]*g.order())
 	while colors.k < k:
 		print(f'Producing {colors.k+1}-coloring...')
 		colors = colors.improve()

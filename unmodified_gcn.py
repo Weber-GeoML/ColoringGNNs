@@ -2,7 +2,6 @@ import networkx as nx
 import torch
 from torch_geometric.nn import GCNConv
 from torch_geometric.utils.convert import from_networkx
-import numpy as np
 from itertools import chain
 
 class GCN(torch.nn.Module):
